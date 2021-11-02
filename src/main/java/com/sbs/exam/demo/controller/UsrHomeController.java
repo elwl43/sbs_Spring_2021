@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UsrHomeController {
+	private int count;
+		
+	UsrHomeController(){
+		count = -1;
+	}
+	
 	@RequestMapping("/usr/home/main")
 	@ResponseBody
 	public String showMain() {
@@ -20,5 +26,11 @@ public class UsrHomeController {
 	@ResponseBody
 	public String showMain3() {
 		return "안녕하세요";
+	}
+	@RequestMapping("/usr/home/main4")
+	@ResponseBody
+	public int showMain4() {
+		count++;
+		return count;
 	}
 }
