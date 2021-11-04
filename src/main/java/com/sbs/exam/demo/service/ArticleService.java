@@ -1,19 +1,18 @@
 package com.sbs.exam.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.vo.Article;
 
 @Service
 public class ArticleService{
-	private int articlesLastId;
-	private List<Article> articles;
+	@Autowired
+	private ArticleRepository articleRepository;
 	
 	public ArticleService() {
-		articlesLastId = 0;
-		articles = new ArrayList<>();
-		
 		makeTestData();
 	}
 	
@@ -27,36 +26,6 @@ public class ArticleService{
 	}
 
 	public Article writeArticle(String title, String body) {
-		int id = articlesLastId + 1;
-		Article article = new Article(id, title, body);
-
-		articles.add(article);
-		articlesLastId = id;
-
-		return article;
-	}
-	public Article getArticle(int id) {
-		for (Article article : articles) {
-			if (article.getId() == id) {
-				return article;
-			}
-		}
-		return null;
-	}
-
-	public void deleteArticle(int id) {
-		Article article = getArticle(id);
-
-		articles.remove(article);
-	}
-
-	public void modifyArticle(int id, String title, String body) {
-		Article article = getArticle(id);
-
-		article.setTitle(title);
-		article.setBody(body);
-	}
-	public List<Article> getArticles() {
-		return articles;
+		return articleRepository.writeArticle(title, body);
 	}
 }
