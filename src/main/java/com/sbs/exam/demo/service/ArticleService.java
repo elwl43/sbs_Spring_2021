@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.vo.Article;
+
 @Service
 public class ArticleService {
 	private ArticleRepository articleRepository;
@@ -12,8 +13,9 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	public Article writeArticle(String title, String body) {
-		return articleRepository.writeArticle(title, body);
+	public int writeArticle(String title, String body) {
+		articleRepository.writeArticle(title, body);
+		return articleRepository.lastInsertId();
 	}
 	public List<Article> getArticles() {
 		return articleRepository.getArticles();
