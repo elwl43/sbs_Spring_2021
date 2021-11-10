@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS sbs_s_2021_10_t;
-CREATE DATABASE sbs_s_2021_10_t;
-USE sbs_s_2021_10_t;
+DROP DATABASE IF EXISTS sbs_s_2021_10;
+CREATE DATABASE sbs_s_2021_10;
+USE sbs_s_2021_10;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
