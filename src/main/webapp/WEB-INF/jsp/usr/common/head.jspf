@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <title>${pageTitle}</title>
 
+<!-- 제이쿼리 -->
+<scrpit src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></scrpit>
+
+<!-- 테일윈드 JIT -->
+<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.com/libraries/font-awesome" />
+
 <link rel="stylesheet" href="/resource/common.css">
 <script src="/resource/common.js"></script>
 
