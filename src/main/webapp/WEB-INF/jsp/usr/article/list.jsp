@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>List</title>
+
+<link rel="stylesheet" href="/resource/common.css">
+<script src="/resource/common.js"></script>
+
 </head>
 <body>
   <h1>List</h1>
@@ -13,8 +17,12 @@
     <a href="/">사이트A</a>
 
     <ul>
-      <li><a href="/">홈</a></li>
-      <li><a href="/usr/article/list">리스트</a></li>
+      <li>
+        <a href="/">홈</a>
+      </li>
+      <li>
+        <a href="/usr/article/list">리스트</a>
+      </li>
     </ul>
   </header>
   

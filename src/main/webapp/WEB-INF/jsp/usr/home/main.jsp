@@ -4,6 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
+
+<link rel="stylesheet" href="/resource/common.css">
+<script src="/resource/common.js"></script>
+
 </head>
 <body>
   <h1>메인페이지</h1>
@@ -21,8 +25,11 @@
     </ul>
   </header>
 
-  <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque fuga doloribus pariatur nemo aperiam aut
-    suscipit architecto itaque modi delectus. Ratione quis fuga nihil rerum recusandae fugiat quibusdam nesciunt
-    pariatur!</div>
+  <div>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+    Atque fuga doloribus pariatur nemo aperiam aut suscipit architecto 
+    itaque modi delectus. Ratione quis fuga nihil rerum recusandae 
+    fugiat quibusdam nesciunt pariatur!
+  </div>
 </body>
 </html>
