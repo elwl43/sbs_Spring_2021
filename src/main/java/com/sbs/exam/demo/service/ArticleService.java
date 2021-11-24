@@ -22,22 +22,46 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);		
 	}
 	
-	public List<Article> getArticles() {
+	public List<Article> getArticles(int actorId) {
+
+		List<Article> articles = articleRepository.getArticles();
+
+		for(Article article : articles) {
+			updatePrintForData(actorId, article);
+		}
 		return articleRepository.getArticles();
 	}
 	
-	public Article getArticle(int id) {
-		return articleRepository.getArticle(id);
+	public Article getArticle(int actorId, int id) {
+
+		Article article = articleRepository.getArticle(id);
+
+		updatePrintForData(actorId, article);
+
+		return article;
+	}
+
+	private void updatePrintForData(int actorId, Article article) {
+
+		if(article == null) {
+			return;
+		}
+
+
+		if(article.getMemberId() == actorId) {
+			article.setExtra__actorCanDelete(true);
+		}
 	}
 	
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
 	}
 	
-	public ResultData<Article> modifyArticle(int id, String title, String body) {
+	public ResultData<Article> modifyArticle(int actorId, int id, String title, String body) {
+
 		articleRepository.modifyArticle(id, title, body);
 		
-		Article article = getArticle(id);
+		Article article = getArticle(actorId, id);
 
 		return ResultData.from("S-1", Ut.f("%d번 게시물을 수정하였습니다.", id), "article", article);
 	}
