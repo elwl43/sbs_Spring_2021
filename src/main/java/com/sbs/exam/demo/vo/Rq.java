@@ -16,19 +16,22 @@ public class Rq {
 	private int loginedMemberId;
 	private HttpServletRequest req;
 	private HttpServletResponse res;
-	private HttpSession httpSession;	
+	private HttpSession httpSession;
+	private HttpServletResponse resp;
+	private HttpSession session;
+	
 	public Rq(HttpServletRequest req, HttpServletResponse res) {
 
 		this.req = req;
-		this.res = res;
-		this.httpSession = req.getSession();
+		this.resp = res;
+		this.session = req.getSession();
 
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 
-		if (httpSession.getAttribute("loginedMemberId") != null) {
+		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
 
 		this.isLogined = isLogined;
@@ -36,19 +39,22 @@ public class Rq {
 	}
 
 	public void printHistoryBackJs() {
-		res.setContentType("text/html; charset=utf-8");
+		resp.setContentType("text/html; charset=utf-8");
+		
 		print("<script>");
 		print("alert('로그인이 필요합니다.');");
 		print("history.back();");
 		print("</script>");
-
 	}
 
 	public void print(String msg) {
 		try {
-			res.getWriter().append(msg);			
-		} catch(IOException e) {
+			resp.getWriter().append(msg);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void login(Member member) {
+		session.setAttribute("loginedMemberId", member.getId());
 	}
 }
