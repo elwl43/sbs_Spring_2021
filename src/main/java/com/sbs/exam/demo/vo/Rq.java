@@ -54,7 +54,12 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
+	
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
+	}
+	
+	public void logout() {
+		session.removeAttribute("loginedMemberId");
 	}
 }
