@@ -22,34 +22,32 @@ public class UsrArticleController {
 	private ArticleService articleService;
 
 	// 액션 메서드 시작
-	@RequestMapping("/usr/article/write")
-	public String showWrite(HttpServletRequest req, Model model) {
-
-		return "usr/article/write";
-	}
-	
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
 
 		Rq rq = (Rq)req.getAttribute("rq");  
 
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "title을(를) 입력해주세요");
+			return rq.jsHistoryBack("제목을 입력해주세요.");
 		}
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "body을(를) 입력해주세요");
+			return rq.jsHistoryBack("내용을 입력해주세요.");
 		}
-
-		// S-1
-		// 4번 게시물이 생성되었습니다.
 		
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 		int id = writeArticleRd.getData1();
 	
-		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
-		
-		return ResultData.newData(writeArticleRd, "article", article);
+		if (Ut.empty(replaceUri)) {
+			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
+
+		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다.", id), replaceUri);
+	}		
+		@RequestMapping("/usr/article/write")
+		public String showWrite(HttpServletRequest req, Model model) {
+
+		return "usr/article/write";
 	}
 	
 	@RequestMapping("/usr/article/list")
