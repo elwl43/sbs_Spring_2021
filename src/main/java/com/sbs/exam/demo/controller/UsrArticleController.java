@@ -97,16 +97,16 @@ public class UsrArticleController {
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
-			return Ut.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
-			return Ut.jsHistoryBack("해당 게시물에 대한 권한이 없습니다");
+			return rq.jsHistoryBack("해당 게시물에 대한 권한이 없습니다");
 		}
 		
 		articleService.deleteArticle(id);
 
-		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제했습니다.", id), "/usr/article/list");
+		return rq.jsReplace(Ut.f("%d번 게시물을 삭제했습니다.", id), "/usr/article/list");
 		// return ResultData.from("S-1", Ut.f("%d번 게시물을 삭제했습니다.", id), "id", id);
 			}
 
@@ -137,18 +137,18 @@ public class UsrArticleController {
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 		
 		if (article == null) {
-			return Ut.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
-			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 
 		articleService.modifyArticle(rq.getLoginedMemberId(), id, title, body);
 
-		return Ut.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 	}
 	// 액션메서드 끝
 }
