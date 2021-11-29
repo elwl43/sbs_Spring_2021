@@ -49,6 +49,12 @@
             <span>리스트</span>
           </a>
         </li>
+        <li>
+          <a class="h-full flex items-center px-3 hover:underline"
+            href="/usr/article/write">
+            <span>글쓰기</span>
+          </a>
+        </li>
         <c:if test="${!rq.isLogined() }">
           <li>
             <a class="h-full flex items-center px-3 hover:underline"
