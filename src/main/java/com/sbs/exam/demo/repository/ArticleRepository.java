@@ -12,6 +12,6 @@ public interface ArticleRepository {
 	public Article getArticle(@Param("id") int id);
 	public void deleteArticle(@Param("id") int id);
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
-	public List<Article> getArticles();
+	public List<Article> getArticles(@Param("boardId") int boardId);
 	public int getLastInsertId();
 }

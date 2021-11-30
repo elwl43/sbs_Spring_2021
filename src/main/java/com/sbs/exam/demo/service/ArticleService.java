@@ -22,14 +22,15 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);		
 	}
 	
-	public List<Article> getArticles(int actorId) {
+	public List<Article> getArticles(int actorId, int boardId) {
 
-		List<Article> articles = articleRepository.getArticles();
+		List<Article> articles = articleRepository.getArticles(boardId);
 
 		for(Article article : articles) {
 			updatePrintForData(actorId, article);
 		}
-		return articleRepository.getArticles();
+		
+		return articles;
 	}
 	
 	public Article getArticle(int actorId, int id) {
