@@ -12,7 +12,7 @@ public interface ArticleRepository {
 			@Param("title") String title, @Param("body") String body);	public Article getArticle(@Param("id") int id);
 	public void deleteArticle(@Param("id") int id);
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
-	public List<Article> getArticles(@Param("boardId") int boardId);
+	public List<Article> getArticles(@Param("boardId") int boardId, int limitStart, int limitTake);
 	public int getLastInsertId();
 	public int getArticlesCount(@Param("boardId") int boardId);
 }

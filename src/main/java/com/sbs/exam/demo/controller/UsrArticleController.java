@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.BoardService;
@@ -55,7 +56,8 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, int boardId) {
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "1") int page) {
 		
 		Board board = boardService.getBoardById(boardId);
 
@@ -64,7 +66,10 @@ public class UsrArticleController {
 		}
 		
 		int articlesCount = articleService.getArticlesCount(boardId);
-		List<Article> articles = articleService.getArticles(rq.getLoginedMemberId(), boardId);
+		int itemsCountInApage = 10;
+
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId,
+				itemsCountInApage, page);
 		
 		model.addAttribute("board", board);
 		model.addAttribute("articlesCount", articlesCount);
