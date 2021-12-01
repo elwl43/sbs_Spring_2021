@@ -132,6 +132,16 @@ UPDATE article
 SET boardId = 2
 WHERE id IN (3,4);
 
+# 게시물 갯수 늘리기
+INSERT INTO article
+(
+    regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 3 + 1), FLOOR(RAND() * 2 + 1), CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+FROM article;
+
+SELECT FLOOR(RAND() * 2 + 1);
+
 SHOW TABLES;
 DESC article;
 
