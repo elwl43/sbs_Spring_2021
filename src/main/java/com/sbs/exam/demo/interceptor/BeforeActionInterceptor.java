@@ -19,6 +19,8 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 
 		rq.initOnBeforeActionInterceptor();
 
+//		System.out.println(rq.isLogined());
+
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }
