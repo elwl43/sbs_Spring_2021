@@ -43,8 +43,9 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea textarea-bordered"
-                name="body" rows="10" placeholder="내용"></textarea>
+              <textarea required="required"
+                class="w-full textarea textarea-bordered" name="body"
+                rows="10" placeholder="내용"></textarea>
             </td>
           </tr>
           <tr>
