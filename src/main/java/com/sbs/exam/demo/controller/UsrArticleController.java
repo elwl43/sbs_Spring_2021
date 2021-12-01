@@ -1,14 +1,11 @@
 package com.sbs.exam.demo.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.BoardService;
 import com.sbs.exam.demo.util.Ut;
@@ -22,18 +19,18 @@ public class UsrArticleController {
 	
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.rq = rq;
 	}
 
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
-
-		Rq rq = (Rq)req.getAttribute("rq");  
+	public String doWrite(String title, String body, String replaceUri) {
 
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("제목을 입력해주세요.");
@@ -58,8 +55,7 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model, int boardId) {
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String showList(Model model, int boardId) {
 		
 		Board board = boardService.getBoardById(boardId);
 
@@ -78,9 +74,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(HttpServletRequest req, Model model, int id) {
-
-		Rq rq = (Rq)req.getAttribute("rq"); 
+	public String showDetail(Model model, int id) {
 
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 
@@ -91,9 +85,7 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	public ResultData<Article> getArticle(HttpServletRequest req, int id) {
-
-		Rq rq = (Rq)req.getAttribute("rq"); 
+	public ResultData<Article> getArticle(int id) {
 
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 
@@ -105,9 +97,7 @@ public class UsrArticleController {
 	}
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpServletRequest req, int id) {
-
-		Rq rq = (Rq)req.getAttribute("rq");  
+	public String doDelete(int id) { 
 
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 
@@ -125,29 +115,27 @@ public class UsrArticleController {
 		// return ResultData.from("S-1", Ut.f("%d번 게시물을 삭제했습니다.", id), "id", id);
 			}
 
-			@RequestMapping("/usr/article/modify")
-			public String showModify(HttpServletRequest req, Model model, int id) {
-				Rq rq = (Rq) req.getAttribute("rq");
+	@RequestMapping("/usr/article/modify")
+	public String showModify(Model model, int id) {
 
-				Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
+			Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 
-				if (article == null) {
+			if (article == null) {
 					return rq.historyBackOnView(Ut.f("%d번 게시물은 존재하지 않습니다.", id));
-				}
+			}
 
-				ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
+			ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
-				if (actorCanModifyRd.isFail()) {
+			if (actorCanModifyRd.isFail()) {
 					return rq.historyBackOnView(actorCanModifyRd.getMsg());
-				}
-				model.addAttribute("article", article);
+			}
+			model.addAttribute("article", article);
 
-				return "usr/article/modify";
+			return "usr/article/modify";
 	}
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String title, String body) {
-		Rq rq = (Rq)req.getAttribute("rq"); 
+	public String doModify(int id, String title, String body) {
 		
 		Article article = articleService.getArticle(rq.getLoginedMemberId(), id);
 		
