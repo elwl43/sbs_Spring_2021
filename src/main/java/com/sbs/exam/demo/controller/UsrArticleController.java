@@ -71,7 +71,7 @@ public class UsrArticleController {
 		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInApage);
 
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, itemsCountInApage,
-				page);
+				page, searchKeywordTypeCode, searchKeyword);
 
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
