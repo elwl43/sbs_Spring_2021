@@ -3,6 +3,7 @@ package com.sbs.exam.demo.repository;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.sbs.exam.demo.vo.Article;
@@ -27,4 +28,13 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseHitCount(int id);
+	
+	@Select("""
+			<script>
+			SELECT hitCount
+			FROM article
+			WHERE id = #{id}
+			</script>
+			""")
+	public int getArticleHitCount(int id);
 }
