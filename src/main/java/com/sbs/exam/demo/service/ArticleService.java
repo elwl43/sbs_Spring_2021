@@ -22,8 +22,8 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);		
 	}
 	
-	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInApage, int page,
-			String searchKeywordTypeCode, String searchKeyword) {
+	public List<Article> getForPrintArticles(int actorId, int boardId, String searchKeywordTypeCode,
+			String searchKeyword, int itemsCountInApage, int page) {
 
 		int limitStart = (page - 1) * itemsCountInApage;
 		int limitTake = itemsCountInApage;
