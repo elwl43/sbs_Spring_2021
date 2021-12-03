@@ -1,6 +1,7 @@
 package com.sbs.exam.demo.service;
 
 import java.util.List;
+import javax.naming.spi.DirStateFactory.Result;
 import org.springframework.stereotype.Service;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.util.Ut;
@@ -100,5 +101,15 @@ public class ArticleService {
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
 
 		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
+	}
+	
+	public ResultData increaseHitCount(int id) {
+		int affectedRowsCount = articleRepository.increaseHitCount(id);
+
+		if (affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+
+		return ResultData.from("S-1", "조회수가 증가되었습니다.", "affectedRowsCount", affectedRowsCount);
 	}
 }
