@@ -61,6 +61,8 @@ public class UsrArticleController {
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		
 		Board board = boardService.getBoardById(boardId);
+		
+		System.out.println("board : " + board);
 
 		if (board == null) {
 			return rq.historyBackOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
