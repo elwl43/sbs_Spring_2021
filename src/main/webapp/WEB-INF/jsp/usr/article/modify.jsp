@@ -25,13 +25,13 @@
           <tr>
             <th>작성날짜</th>
             <td>
-              <div class="badge badge-primary">${article.regDateForPrint}</div>
+              <div>${article.forPrintType2RegDate}</div>
             </td>
           </tr>
           <tr>
             <th>수정날짜</th>
             <td>
-              <div class="badge badge-primary">${article.updateDateForPrint}</div>
+              <div>${article.forPrintType2UpdateDate}</div>
             </td>
           </tr>
           <tr>
