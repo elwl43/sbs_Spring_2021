@@ -91,9 +91,9 @@ public class Rq {
 		return Ut.jsReplace(msg, uri);
 	}
 	
-	//Rq 객체가 자연스럽게 생성되도록 유도하는 메서드
-		//지우면 안됨
-		//편의성을 높이기 위해 BeforeActionInterceptor 에서 호출 필요
+	// Rq 객체가 자연스럽게 생성되도록 유도하는 메서드
+	// 지우면 안됨
+	// 편의성을 높이기 위해 BeforeActionInterceptor 에서 호출 필요
 	public void initOnBeforeActionInterceptor() {
 
 	}

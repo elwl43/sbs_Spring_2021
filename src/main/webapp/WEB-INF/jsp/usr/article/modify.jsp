@@ -42,14 +42,12 @@
           </tr>
           <tr>
             <th>조회수</th>
-            <td>
-              <span class="badge badge-ghost">${article.hitCount }</span>
+            <td><span class="badge badge-ghost">${article.hitCount }</span>
             </td>
           </tr>
           <tr>
             <th>추천</th>
-            <td>
-              <span class="badge badge-ghost">${article.extra__goodReactionPoint }</span>
+            <td><span class="badge badge-ghost">${article.extra__goodReactionPoint }</span>
             </td>
           </tr>
           <tr>
