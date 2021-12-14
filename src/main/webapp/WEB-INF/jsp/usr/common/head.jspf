@@ -83,7 +83,7 @@
         <c:if test="${rq.isLogined() }">
           <li>
             <a class="h-full flex items-center px-3 hover:underline"
-              href="/usr/member/modify">
+              href="/usr/member/myPage">
               <span>${rq.loginedMember.nickname }'s Profile</span>
             </a>
           </li>
